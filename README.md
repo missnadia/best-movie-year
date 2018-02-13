@@ -1,15 +1,13 @@
-# Lorem
+# Top 10 Best Movies by Year
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/lorem`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+CLI Gem composed of an OO Ruby application that lists the top 10 best movies by year of release per Rotten Tomatoes.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'lorem'
+gem 'best-movie-year'
 ```
 
 And then execute:
@@ -18,11 +16,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install lorem
+    $ gem install best-movie-year
 
 ## Usage
 
-TODO: Write usage instructions here
+Run best-movie-year after installation.
 
 ## Development
 

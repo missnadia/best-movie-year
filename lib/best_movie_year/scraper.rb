@@ -1,4 +1,4 @@
-require "best_movie_year_version"
+require "best_movie_year/version"
 
 module Best_Movie
   # Your code goes here...

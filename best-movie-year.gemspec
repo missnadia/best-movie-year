@@ -1,11 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "lorem/version"
+require "best/movie/year/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "lorem"
-  spec.version       = Lorem::VERSION
+  spec.name          = "best-movie-year"
+  spec.version       = Best::Movie::Year::VERSION
   spec.authors       = ["'Nadia Lee'"]
   spec.email         = ["'miss.nadia.lee@gmail.com'"]
 

@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
 require_relative "../lib/best_movie_year/cli"
+
+BestMovies::CLI.new.call

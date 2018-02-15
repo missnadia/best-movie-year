@@ -1,8 +1,9 @@
 class BestMovies::Movie
-  attr_accessor :name
+  attr_accessor :name, :year
 
-  def initialize(name = nil)
+  def initialize(name = nil, year = nil)
     @name = name
+    @year = year
     @@all << self
   end
 

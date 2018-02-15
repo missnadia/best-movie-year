@@ -3,6 +3,7 @@ class BestMovies::Movie
 
   def initialize(name = nil)
     @name = name
+    @@all << self
   end
 
   def self.all

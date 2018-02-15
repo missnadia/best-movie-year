@@ -6,6 +6,6 @@ class BestMovies::CLI
   end
 
   def start
-    puts "Please enter the movie release year: "
+    puts "Please enter a year to view the top 10 movies released that year: (1950 to Present)"
   end
 end

@@ -1,0 +1,3 @@
+class BestMovies::Movie
+
+end

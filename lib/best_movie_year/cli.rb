@@ -6,6 +6,6 @@ class BestMovies::CLI
   end
 
   def start
-
+    puts "Please enter the movie release year: "
   end
 end

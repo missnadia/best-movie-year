@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Run best-movie-year after installation.
+Run 'best-movie-year' after installation.
 
 ## Development
 

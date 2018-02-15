@@ -1,5 +1,3 @@
-require "best_movie_year/version"
+class BestMovies::Scraper
 
-module Best_Movie
-  # Your code goes here...
 end

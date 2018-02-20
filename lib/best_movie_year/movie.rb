@@ -12,6 +12,6 @@ class BestMovies::Movie
   end
 
   def self.find(input)
-    self.all[input-1]
+    self.all[input.to_i]
   end
 end

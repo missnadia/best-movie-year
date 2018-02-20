@@ -15,21 +15,13 @@ class BestMovies::Movie
     self.all[input.to_i]
   end
 
-  def self.scrape_years(url)
-    movie_list = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=2018"))
+  def self.scrape_movies
+    doc = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=2018"))
     movies = []
-    movie_list.css(".class dropdown-menu").children.css("a").map { |l| l.attribute("href").value }
-    years.each.do |year|
-      movie = year.css("a.unstyled.articleLink").text
-      movies << movie
-    end
-    movies
-  end
+    movie_year = doc.css(".dropdown-menu").children.css("a").map { |l| l.attribute("href").value }
+    movie_title = doc.css("a.unstyled.articleLink").text
+    movies << {title: movie_title, year: movie_year}
 
-  def self.scrape_movies(year_url)
-    movies = []
-    movie_list = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=#{year}"))
-    movie_list.css("a.unstyled.articleLink").map { |l| l.text }
-    movies << movie
+    movies
   end
 end

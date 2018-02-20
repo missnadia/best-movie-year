@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
-require "../lib/best_movie_year"
+require "bundler/setup"
+require_relative "../lib/best_movie_year"
 
 BestMovies::CLI.new.call

@@ -6,22 +6,23 @@ class BestMovies::CLI
   end
 
   def start
-    input = nil
-    while input != "exit"
-      puts "Please enter a year from 1950 to 2018 to view the top 10 movies released that year. To exit, please type 'exit':"
-      input = gets.strip.to_i
-      if input > 1949 && input < 2019
-        if movie = BestMovies::Movie.find(input.to_i)
-          list_movie(movie)
-        end
-      else input < 1949 || input > 2018
-        start
-      end
+    puts "Please enter a four-digit year from 1950 to 2018 to view the top 10 movies of that year. To exit, please type 'exit':"
+    input = gets.strip
+    if input.to_i >= 1950 && input.to_i <= 2018
+      BestMovies::Movie.find(input.to_i)
+      puts "Top 10 Movies of #{input.to_i}"
+      print_movies(movie)
+    elsif input.to_i < 1950 || input.to_i > 2018
+      puts "Invalid entry."
+      start
+    elsif input.downcase == "exit"
+      puts "Goodbye."
+    else
+      start
     end
-    puts "Goodbye."
   end
 
-  def list_movie(movie)
+  def print_movies(movie)
     BestMovies::Movie.all.each.with_index(1) { |movie, index| puts "#{index}. #{movie.name}"}
   end
 end

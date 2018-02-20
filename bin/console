@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require "bundler/setup"
-require_relative "best_movie_year"
+require "best_movie_year"
 require "pry"
 Pry.start
 

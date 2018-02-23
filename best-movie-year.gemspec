@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Top 10 Movies by Year}
   spec.description   = %q{Lists the top 10 movies of a given year rated by Rotten Tomatoes.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = ""
   spec.license       = "MIT"
 
   spec.files = `git ls-files -z`.split("\x0").reject do |f|

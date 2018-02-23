@@ -10,8 +10,9 @@ class BestMovies::CLI
     input = gets.strip
     if input.to_i >= 1950 && input.to_i <= 2018
       BestMovies::Movie.find(input.to_i)
+      puts ""
       puts "Top 10 Movies of #{input.to_i}"
-      print_movies(movie)
+      print_movies
     elsif input.to_i < 1950 || input.to_i > 2018
       puts "Invalid entry."
       start
@@ -22,7 +23,7 @@ class BestMovies::CLI
     end
   end
 
-  def print_movies(movie)
-    BestMovies::Movie.all.each.with_index(1) { |movie, index| puts "#{index}. #{movie.name}"}
+  def print_movies
+    BestMovies::Movie.all.each.with_index(1) { |movie, index| puts "#{index}. #{movie.title}" }
   end
 end

@@ -13,7 +13,7 @@ class BestMovies::CLI
     puts "Please enter a four-digit year from 1950 to 2018 to view the top 10 movies of that year. To exit, please type 'exit':"
     input = gets.strip
     if input.to_i >= 1950 && input.to_i <= 2018
-      BestMovies::Movie.find(input.to_i)
+      BestMovies::Movie.find(input)
       puts ""
       puts "Top 10 Movies of #{input.to_i}"
       print_movies

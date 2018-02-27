@@ -24,6 +24,8 @@ class BestMovies::CLI
   end
 
   def print_movies
+    BestMovies::Movie.scrape_years
+    BestMovies::Movie.scrape_movies(year_url)
     BestMovies::Movie.all.each.with_index(1) { |movie, index| puts "#{index}. #{movie.title}" }
   end
 end

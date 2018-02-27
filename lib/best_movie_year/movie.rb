@@ -15,7 +15,7 @@ class BestMovies::Movie
   end
 
   def self.find(input)
-    self.all.detect { |y| y.input.to_s == 
+    self.all.detect { |y| y.input.to_s == y.input.to_s }
   end
 
   def self.scrape_years

@@ -3,8 +3,10 @@ class BestMovies::Movie
 
   @@all = []
   
-  def initialize
-    years_hash.each { |attribute, value| self.send("#{attribute}=", value) }
+  def initialize(title = nil, year = nil, year_url = nil)
+    @title = title
+    @year = year
+    @year_url = year_url
     @@all << self
   end
 
@@ -13,7 +15,7 @@ class BestMovies::Movie
   end
 
   def self.find(input)
-    self.all[input.to_s]
+    self.all.detect { |y| y.input.to_s == 
   end
 
   def self.scrape_years

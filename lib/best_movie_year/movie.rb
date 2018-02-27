@@ -13,7 +13,7 @@ class BestMovies::Movie
   end
 
   def self.find(input)
-    self.all[input]
+    self.all[input.to_s]
   end
 
   def self.scrape_years
@@ -27,11 +27,12 @@ class BestMovies::Movie
     movie_years
   end
   
-  
   def self.scrape_movies(year_url)
     movies = {}
     doc = Nokogiri::HTML(open("https://www.rottentomatoes.com#{year_url}"))
-    movies[:title] = doc.css("a.unstyled.articleLink").children.css("a").map { |t| t.text }
+    10.times do
+      movies[:title] = doc.css("a.unstyled.articleLink").children.css("a").map { |t| t.text }
+    end
     
     movies
   end

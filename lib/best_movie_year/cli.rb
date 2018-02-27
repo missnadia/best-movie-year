@@ -5,6 +5,10 @@ class BestMovies::CLI
     start
   end
 
+  def print_movies
+    BestMovies::Movie.all.each.with_index(1) { |movie, index| puts "#{index}. #{movie.title}" }
+  end
+
   def start
     puts "Please enter a four-digit year from 1950 to 2018 to view the top 10 movies of that year. To exit, please type 'exit':"
     input = gets.strip
@@ -21,11 +25,5 @@ class BestMovies::CLI
     else
       start
     end
-  end
-
-  def print_movies
-    BestMovies::Movie.scrape_years
-    BestMovies::Movie.scrape_movies(year_url)
-    BestMovies::Movie.all.each.with_index(1) { |movie, index| puts "#{index}. #{movie.title}" }
   end
 end

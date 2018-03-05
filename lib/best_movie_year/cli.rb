@@ -17,12 +17,10 @@ class BestMovies::CLI
       puts ""
       puts "Top 10 Movies of #{input.to_i}"
       print_movies
-    elsif input.to_i < 1950 || input.to_i > 2018
-      puts "Invalid entry."
-      start
     elsif input.downcase == "exit"
       puts "Goodbye."
     else
+      puts "Invalid entry."
       start
     end
   end

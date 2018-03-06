@@ -6,9 +6,8 @@ class BestMovies::CLI
   end
 
   def print_movies(input)
-    BestMovies::Movie.scrape_years(input)
     movie = BestMovies::Movie.new
-    BestMovies::Movie.all.each.with_index(1) { |movie, index| puts "#{index}. #{movie.title}" }
+    BestMovies::Movie.all.each.with_index(1) { |movie, index| puts "#{index}. #{BestMovies::Movie.title}" }
   end
 
   def start
@@ -16,7 +15,8 @@ class BestMovies::CLI
     input = gets.strip
     if input.to_i >= 1950 && input.to_i <= 2018
       puts ""
-      puts "Best Movie of #{input.to_i}"
+      puts "Top 10 Movies of #{input.to_i}"
+      BestMovies::Movie.scrape_years(input)
       print_movies(input)
     elsif input.downcase == "exit"
       puts "Goodbye."

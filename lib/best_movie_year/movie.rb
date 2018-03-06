@@ -1,41 +1,29 @@
 class BestMovies::Movie
-  attr_accessor :title, :year, :year_url
+  attr_accessor :title
 
   @@all = []
-  
-  def initialize(title = nil, year = nil, year_url = nil)
+
+  def initialize(title = nil)
     @title = title
-    @year = year
-    @year_url = year_url
     @@all << self
   end
 
   def self.all
-    @@all ||= scrape_movies
+    @@all ||= BestMovies::Scraper.scrape_years(input)
   end
 
-  def self.find(input)
-    self.all.detect { |y| y.input.to_s == y.input.to_s }
+  def self.reset_all
+    @@all.clear
   end
 
-  def self.scrape_years
-    doc = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=2018"))
-    movie_years = []
-    
-    year_url = doc.css(".dropdown-menu").children.css("a").map { |l| l.attribute("href").value }
-    movie_year = doc.css(".dropdown-menu").children.css("a").map { |y| y.text }
-    movie_years << { year_url: year_url, year: movie_year }
+  def self.scrape_years(input)
+    # create hash containing inputted movie year & best movie title for that year
+    movie = []
+    doc = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=2000"))
+    # iterate over each year and scrape year
+    @title ||= doc.css("table.table a.unstyled.articleLink").first.text
+    movie << @title
 
-    movie_years
-  end
-  
-  def self.scrape_movies(year_url)
-    movies = {}
-    doc = Nokogiri::HTML(open("https://www.rottentomatoes.com#{year_url}"))
-    10.times do
-      movies[:title] = doc.css("a.unstyled.articleLink").children.css("a").map { |t| t.text }
-    end
-    
-    movies
+    movie
   end
 end

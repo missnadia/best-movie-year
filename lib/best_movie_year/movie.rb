@@ -7,9 +7,9 @@ class BestMovies::Movie
 
   @@all = []
 
-  def initialize(year = nil, title = nil)
-    @year = year
+  def initialize(title = nil)
     @title = title
+    @@all << self
   end
 
   def self.all
@@ -33,5 +33,5 @@ class BestMovies::Movie
     @@all << title[1..10]
     @@all
   end
-  #Movie.scrape_years(2008)
+  # Movie.scrape_years(1990)
 end

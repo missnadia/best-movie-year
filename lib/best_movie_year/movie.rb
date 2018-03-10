@@ -1,14 +1,15 @@
 require "nokogiri"
 require "open-uri"
 require "pry"
-
-class BestMovies::Movie
+class Movie
+# class BestMovies::Movie
   attr_accessor :title, :year
 
   @@all = []
 
-  def initialize(title = nil)
+  def initialize(title = nil, year = nil)
     @title = title
+    @year = year
     @@all << self
   end
 
@@ -22,16 +23,27 @@ class BestMovies::Movie
 
   def self.scrape_years(input)
     # create hash containing inputted movie year & best movie title for that year
-    # movie = []
+    years = []
     doc = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=" + "#{input}"))
-    # year = doc.css("h2.panel-heading").first.text.split(" ")
-    # movie[year[4]] = {
-    title = doc.css("table.table a.unstyled.articleLink").text.split("            ").first(11)
+    year_split = doc.css("h2.panel-heading").first.text.split(" ")
+    @year = year_split[4].to_i
+    #  movies[year] = {
+    # @title = doc.css("table.table a.unstyled.articleLink").text.split("            ").first(11).drop(1)
     # .gsub(/\s+/m, ' ')
     # }
-
-    @@all << title[1..10]
-    @@all
+    years << @year
+    # @@all = @title
+    # movies << @title
+    years
   end
-  # Movie.scrape_years(1990)
+
+  def self.scrape_movies(input)
+    movies = {}
+    doc = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=" + "#{input}"))
+    movies[:title] = doc.css("table.table a.unstyled.articleLink").text.split("            ").first(11).drop(1)
+
+    movies
+    binding.pry
+  end
+   Movie.scrape_movies(2000)
 end

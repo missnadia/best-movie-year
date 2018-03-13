@@ -64,6 +64,7 @@ class BestMovies::Movie
     }
 
     movie_list
+    
   end
 # Movie.scrape_movies("https://www.rottentomatoes.com/top/bestofrt/?year=2000")
 

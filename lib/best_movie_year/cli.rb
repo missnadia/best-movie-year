@@ -19,8 +19,7 @@ class BestMovies::CLI
   end
 
   def print_movies
-    movie = BestMovies::Movie.new
-    BestMovies::Movie.all.each.with_index(1) { |title, i|
+    BestMovies::Movie.all.each.with_index(1) { |movie, i|
         puts "#{i}. #{movie.title}"
         puts "#{movie.desc}"
     }

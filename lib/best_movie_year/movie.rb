@@ -17,7 +17,8 @@ class BestMovies::Movie
 
   def self.create(movie_array)
     movie_array.each { |movie_hash|
-      self.new(movie_hash)
+      @movie = self.new(movie_hash)
+      @movie.add_value(movie_hash)
     }
   end
 
@@ -64,13 +65,13 @@ class BestMovies::Movie
     }
 
     movie_list
-    
+
   end
 # Movie.scrape_movies("https://www.rottentomatoes.com/top/bestofrt/?year=2000")
 
   def self.scrap_desc(url)
     movie = {}
-    doc = Nokogiri::HTML(open("#{url}"))
+    doc = Nokogiri::HTML(open("#{:url}"))
     movie[:desc] = doc.css("div#movieSynopsis.movie_synopsis.clamp.clamp-6").text.strip
 
     movie

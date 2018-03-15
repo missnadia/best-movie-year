@@ -8,10 +8,10 @@ class BestMovies::Movie
 
   @@all = []
 
-  def initialize(title = nil, desc = nil, url = nil)
-    @title = title
-    @desc = desc
-    @url = url
+  def initialize(movie_hash)
+    movie_hash.each { |attribute, value|
+      self.send("#{attribute}=", value)
+    }
     @@all << self
   end
 
@@ -22,8 +22,8 @@ class BestMovies::Movie
     }
   end
 
-  def add_value(movie_hash)
-    movie_hash.each { |attr, value|
+  def add_value(desc_hash)
+    desc_hash.each { |attr, value|
       self.send("#{attr}=", value)
     }
     self
@@ -61,20 +61,20 @@ class BestMovies::Movie
     movies.each { |movie|
       movie_title = movie.text.split("            ").first(11).drop(1)
       movie_url = "https://www.rottentomatoes.com" + movie.attribute("href").value
-      movie_list << {title: movie_title[0], url: movie_url}
+      movie_desc = @movie.scrape_desc(movie_url)
+      movie_list << {title: movie_title[0], url: movie_url, desc: movie_desc}
     }
 
     movie_list
-
   end
 # Movie.scrape_movies("https://www.rottentomatoes.com/top/bestofrt/?year=2000")
 
   def self.scrap_desc(url)
-    movie = {}
-    doc = Nokogiri::HTML(open("#{:url}"))
-    movie[:desc] = doc.css("div#movieSynopsis.movie_synopsis.clamp.clamp-6").text.strip
+    movies = {}
+    doc = Nokogiri::HTML(open(url))
+    movies[:desc] = doc.css("div#movieSynopsis.movie_synopsis.clamp.clamp-6").text.strip
 
-    movie
+    movies
   end
   # Movie.scrap_desc("https://www.rottentomatoes.com/m/chicken_run")
 end

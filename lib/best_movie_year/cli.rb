@@ -11,9 +11,6 @@ class BestMovies::CLI
   def make_movies(input)
     movie_array = BestMovies::Movie.scrape_movies(BASE_PATH + "/top/bestofrt/?year=" + input)
     BestMovies::Movie.create(movie_array)
-
-    add_desc = BestMovies::Movie.scrape_desc(BASE_PATH + "#{BestMovies::Movie.url}")
-    BestMovies::Movie.add_value(add_desc)
   end
 
   def print_movies

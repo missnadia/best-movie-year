@@ -12,10 +12,10 @@ class BestMovies::CLI
     BestMovies::Movie.create(movie_array)
   end
 
-#  def make_desc
-#    add_desc = BestMovies::Movie.scrape_desc(BASE_PATH + "#{BestMovies::Movie.title[:url]}")
-#      BestMovies::Movie.add_value(add_desc)
-#  end
+  def make_desc(url)
+    BestMovies::Movie.scrape_movies(url)
+    #BestMovies::Movie.add_value(a)
+  end
 
   def diff_year
     puts "Would you like to enter a different year? (Y/N)"
@@ -37,8 +37,8 @@ class BestMovies::CLI
     puts "Would you like more information? (Y/N)"
     input_1 = gets.strip
     if input_1.downcase == "y"
-      make_desc
-      puts "movie info"
+      #make_desc
+      puts "info"
       puts ""
       diff_year
     elsif input_1.downcase == "n"
@@ -54,9 +54,8 @@ class BestMovies::CLI
   def print_movies
     BestMovies::Movie.all.first(10).each.with_index(1) { |movie, i|
         puts "#{i}. #{movie.title[:title]}"
-        BestMovies::Movie.scrape_desc("#{movie.title[:url]}")
-        puts "#{movie.title[:desc]}"
-        binding.pry
+        url = movie.title[:url]
+        make_desc(url)
     }
     puts ""
     add_info

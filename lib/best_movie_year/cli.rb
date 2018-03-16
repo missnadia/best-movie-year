@@ -13,8 +13,46 @@ class BestMovies::CLI
   end
 
   def make_desc(url)
-    BestMovies::Movie.scrape_movies(url)
+    add_desc = BestMovies::Movie.scrape_movies(url)
+    BestMovies::Movie.add_value(add_desc)
     #BestMovies::Movie.add_value(a)
+    binding.pry
+  end
+
+  def print_movies
+    BestMovies::Movie.all.first(10).each.with_index(1) { |movie, i|
+      puts "#{i}. #{movie.title[:title]}"
+      url = "#{movie.title[:url]}"
+      make_desc(url)
+    }
+    puts ""
+    add_info
+  end
+
+  def print_desc
+    BestMovies::Movie.all.first(10).each.with_index(1) { |movie, i|
+      puts "#{i}. #{movie.desc}"
+      binding.pry
+    }
+  end
+
+  def add_info
+    puts "Would you like more information? (Y/N)"
+    input_1 = gets.strip
+    if input_1.downcase == "y"
+      puts ""
+      print_desc
+      #puts "info"
+      puts ""
+      diff_year
+    elsif input_1.downcase == "n"
+      puts ""
+      diff_year
+    else
+      puts "Invalid entry. Please enter Y or N"
+      puts ""
+      print_movies
+    end
   end
 
   def diff_year
@@ -31,34 +69,6 @@ class BestMovies::CLI
       puts ""
       diff_year
     end
-  end
-
-  def add_info
-    puts "Would you like more information? (Y/N)"
-    input_1 = gets.strip
-    if input_1.downcase == "y"
-      #make_desc
-      puts "info"
-      puts ""
-      diff_year
-    elsif input_1.downcase == "n"
-      puts ""
-      diff_year
-    else
-      puts "Invalid entry. Please enter Y or N"
-      puts ""
-      print_movies
-    end
-  end
-
-  def print_movies
-    BestMovies::Movie.all.first(10).each.with_index(1) { |movie, i|
-        puts "#{i}. #{movie.title[:title]}"
-        url = movie.title[:url]
-        make_desc(url)
-    }
-    puts ""
-    add_info
   end
 
   def start

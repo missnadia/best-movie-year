@@ -12,19 +12,11 @@ class BestMovies::CLI
     BestMovies::Movie.create(movie_array)
   end
 
-  def make_desc(url)
-    # BestMovies::Movie.scrape_movies(url)
-    desc_array = BestMovies::Movie.scrape_movies(url)
-    BestMovies::Movie.create(desc_array)
-    #BestMovies::Movie.add_value(add_desc)
-    #BestMovies::Movie.add_value(a)
-  end
-
   def print_movies
     BestMovies::Movie.all.first(10).each.with_index(1) { |movie, i|
       puts "#{i}. #{movie.title[:title]}"
       url = "#{movie.title[:url]}"
-      make_desc(url)
+      BestMovies::Movie.scrape_desc(url)
     }
     puts ""
     add_info
@@ -32,7 +24,8 @@ class BestMovies::CLI
 
   def print_desc
     BestMovies::Movie.all.first(10).each.with_index(1) { |movie, i|
-      puts "#{i}. #{movie.desc}"
+      puts "#{i}. #{wrap(movie.title[:desc][:desc])}"
+      puts ""
     }
   end
 
@@ -42,7 +35,6 @@ class BestMovies::CLI
     if input.downcase == "y"
       puts ""
       print_desc
-      #puts "info"
       puts ""
       diff_year
     elsif input.downcase == "n"
@@ -87,7 +79,12 @@ class BestMovies::CLI
     else
       puts ""
       puts "Invalid entry."
+      puts ""
       start
     end
+  end
+
+  def wrap(s, width=73)
+    s.gsub(/(.{1,#{width}})(\s+|\Z)/, "\\1\n")
   end
 end

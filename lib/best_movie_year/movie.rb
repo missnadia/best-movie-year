@@ -37,24 +37,7 @@ class BestMovies::Movie
     @@all.clear
   end
 
-  #def self.scrape_years(input)
-    # create hash containing inputted movie year & best movie title for that year
-  #  years = []
-  #  doc = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=" + "#{input}"))
-  #  year_split = doc.css("h2.panel-heading").first.text.split(" ")
-  #  @year = year_split[4].to_i
-    #  movies[year] = {
-    # @title = doc.css("table.table a.unstyled.articleLink").text.split("            ").first(11).drop(1)
-    # .gsub(/\s+/m, ' ')
-    # }
-  # years << @year
-    # @@all = @title
-    # movies << @title
-  #  years
-  #end
-
   def self.scrape_movies(main_url)
-    #doc = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=" + "#{input}"))
     movie_list = []
     doc = Nokogiri::HTML(open("#{main_url}"))
     movies = doc.css("table.table a.unstyled.articleLink")
@@ -71,7 +54,10 @@ class BestMovies::Movie
   def self.scrape_desc(url)
     movies = {}
     doc = Nokogiri::HTML(open("#{url}"))
-    movies[:desc] = doc.css("div#movieSynopsis.movie_synopsis.clamp.clamp-6").text.strip
+    movie_title = doc.css
+    movie_title.each { |m|
+      movies[:desc] = doc.css("div#movieSynopsis.movie_synopsis.clamp.clamp-6").text.strip
+    }
 
     movies
   end

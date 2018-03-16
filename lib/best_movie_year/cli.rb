@@ -11,12 +11,28 @@ class BestMovies::CLI
   def make_movies(input)
     movie_array = BestMovies::Movie.scrape_movies(BASE_PATH + "/top/bestofrt/?year=" + input)
     BestMovies::Movie.create(movie_array)
+  end
 
-  #  BestMovies::Movie.all.each { |movie|
-  #  add_desc = BestMovies::Movie.scrape_desc(BASE_PATH + "#{movie.url}")
-#    movie.add_value(add_desc)
-#    }
+  def make_desc
+    BestMovies::Movie.all.each { |movie|
+    add_desc = BestMovies::Movie.scrape_desc(BASE_PATH + "#{movie.url}")
+    movie.add_value(add_desc)
+    }
+  end
 
+  def diff_year
+    puts "Would you like to enter a different year? (Y/N)"
+    input_2 = gets.strip
+    puts ""
+    if input_2.downcase == "n"
+      puts "Goodbye."
+    elsif input_2.downcase == "y"
+      start
+    else
+      puts "Invalid entry. Please enter Y or N"
+      puts ""
+      diff_year
+    end
   end
 
   def print_movies
@@ -25,36 +41,15 @@ class BestMovies::CLI
     }
     puts ""
     puts "Would you like more information? (Y/N)"
-    input1 = gets.strip
-    if input1.downcase == "y"
-      puts "info"
+    input_1 = gets.strip
+    if input_1.downcase == "y"
+      #make_desc
+      puts "movie info"
       puts ""
-      puts "Would you like to enter a different year? (Y/N)"
-        input2 = gets.strip
-        puts ""
-        if input2.downcase == "n"
-          puts "Goodbye."
-        elsif input2.downcase == "y"
-          start
-        else
-          puts ""
-          puts "Invalid entry. Please enter Y or N"
-          puts ""
-        end
-    elsif input1.downcase == "n"
+      diff_year
+    elsif input_1.downcase == "n"
       puts ""
-      puts "Would you like to enter a different year? (Y/N)"
-        input1 = gets.strip
-        puts ""
-        if input2.downcase == "n"
-          puts "Goodbye."
-        elsif input2.downcase == "y"
-          start
-        else
-          puts ""
-          puts "Invalid entry. Please enter Y or N"
-          puts ""
-        end
+      diff_year
     else
       puts ""
       puts "Invalid entry. Please enter Y or N"

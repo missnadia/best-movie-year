@@ -18,15 +18,14 @@ class BestMovies::Movie
   def self.create(movie_array)
     movie_array.each { |movie_hash|
       @movie = self.new(movie_hash)
-      #@movie.add_value(desc_hash)
+      #@movie.add_value(add_desc)
     }
   end
 
-  def add_value(desc_hash)
-    desc_hash.each { |attr, value|
-      self.send("#{attr}=", value)
+  def add_value(add_desc)
+    add_desc.each { |desc|
+      @movie = self.new(desc)
     }
-    self
   end
 
   def self.all
@@ -52,14 +51,12 @@ class BestMovies::Movie
 # Movie.scrape_movies("https://www.rottentomatoes.com/top/bestofrt/?year=2000")
 
   def self.scrape_desc(url)
-    movies = {}
-    doc = Nokogiri::HTML(open("#{url}"))
-    movie_title = doc.css
-    movie_title.each { |m|
-      movies[:desc] = doc.css("div#movieSynopsis.movie_synopsis.clamp.clamp-6").text.strip
-    }
 
-    movies
+    doc = Nokogiri::HTML(open(url))
+    movie_desc = doc.css("div#movieSynopsis.movie_synopsis.clamp.clamp-6").text.strip
+    @@all << {desc: movie_desc}
+
+    @@all
   end
-  # Movie.scrap_desc("https://www.rottentomatoes.com/m/chicken_run")
+   #Movie.scrape_desc("https://www.rottentomatoes.com/m/chicken_run")
 end

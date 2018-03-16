@@ -22,12 +22,12 @@ class BestMovies::Movie
     }
   end
 
-  def add_value(add_desc)
-    add_desc.each { |attribute, value|
-      self.send("#{attribute}=", value)
-    }
-    self
-  end
+  #def add_value(add_desc)
+  #  add_desc.each { |attribute, value|
+  #    self.send("#{attribute}=", value)
+  #  }
+  #  self
+  #end
 
   def self.all
     @@all
@@ -52,10 +52,12 @@ class BestMovies::Movie
 # Movie.scrape_movies("https://www.rottentomatoes.com/top/bestofrt/?year=2000")
 
   def self.scrape_desc(url)
-    moviess = []
+    titles = []
     doc = Nokogiri::HTML(open(url))
-    moviess[:desc] = doc.css("div#movieSynopsis.movie_synopsis.clamp.clamp-6").text.strip
-    moviess
+    movie_desc = doc.css("div#movieSynopsis.movie_synopsis.clamp.clamp-6").text.strip
+    titles << {desc: movie_desc}
+
+    titles
   end
    #Movie.scrape_desc("https://www.rottentomatoes.com/m/chicken_run")
 end

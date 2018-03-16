@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["'miss.nadia.lee@gmail.com'"]
 
   spec.summary       = %q{Top 10 Movies by Year}
-  spec.description   = %q{Lists the top 10 movies of a given year rated by Rotten Tomatoes.}
+  spec.description   = %q{Lists the top 10 movies by year of relese per Rotten Tomatoes.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

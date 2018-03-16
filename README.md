@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Run best-movie-year after installation.
+Run `best-movie-year` after installation.
 
 ## Development
 
@@ -38,4 +38,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Lorem project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/missnadia/best-movie-year/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Best Movie Year project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/missnadia/best-movie-year/blob/master/CODE_OF_CONDUCT.md).

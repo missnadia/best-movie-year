@@ -24,7 +24,7 @@ class BestMovies::CLI
 
   def print_desc
     BestMovies::Movie.all.first(10).each.with_index(1) { |movie, i|
-      puts "#{i}. #{wrap(movie.title[:desc][:desc])}"
+      puts "#{i}. #{movie.title[:desc][:desc]}"
       puts ""
     }
   end
@@ -82,9 +82,5 @@ class BestMovies::CLI
       puts ""
       start
     end
-  end
-
-  def wrap(s, width=73)
-    s.gsub(/(.{1,#{width}})(\s+|\Z)/, "\\1\n")
   end
 end

@@ -1,6 +1,6 @@
 class BestMovies::CLI
 
-  BASE_PATH = "https://www.rottentomatoes.com"
+  BASE_PATH = "https://www.rottentomatoes.com/top/bestofrt/?year="
 
   def call
     puts "Welcome!"
@@ -8,7 +8,7 @@ class BestMovies::CLI
   end
 
   def make_movies(input)
-    movie_array = BestMovies::Movie.scrape_movies(BASE_PATH + "/top/bestofrt/?year=" + input)
+    movie_array = BestMovies::Scraper.scrape_movies(BASE_PATH + input)
     BestMovies::Movie.create(movie_array)
   end
 
@@ -16,7 +16,7 @@ class BestMovies::CLI
     BestMovies::Movie.all.first(10).each.with_index(1) { |movie, i|
       puts "#{i}. #{movie.title[:title]}"
       url = "#{movie.title[:url]}"
-      BestMovies::Movie.scrape_desc(url)
+      BestMovies::Scraper.scrape_desc(url)
     }
     puts ""
     add_info
